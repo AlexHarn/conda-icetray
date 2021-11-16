@@ -47,7 +47,7 @@ conda create -y -n "$env_name" python="$python_version"
 
 # Install requirements
 echo "Installing some requirements into $env_name environment..."
-conda install -n "$env_name" -y numpy scipy pandas pytables pyaml
+conda install -n "$env_name" -y numpy scipy pandas pytables pyaml requests
 
 ## Add activate and deactivate scripts to load icetray env
 # Start by grabbing the environment path
