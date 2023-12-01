@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Check if conda is installed
-if ! command -v conda &> /dev/null
+# Check if mamba is installed
+if ! command -v mamba &> /dev/null
 then
-    echo "The 'conda' command could not be found. Exiting..."
+    echo "The 'mamba' command could not be found. Exiting..."
     exit
 fi
 
@@ -33,7 +33,7 @@ done
 while true; do
     read -p "Enter conda environment name: " env_name
         # Check if the environment exists
-        if { conda env list | grep $env_name; } >/dev/null 2>&1; then
+        if { mamba env list | grep $env_name; } >/dev/null 2>&1; then
             if $create_new; then
                 echo "A Conda environment named $env_name already exists."
             else
@@ -77,7 +77,7 @@ done
 # Create/check env
 if $create_new; then
     echo "Creating your $env_name environment now..."
-    conda create -y -n "$env_name" python="$python_version"
+    mamba create -y -n "$env_name" python="$python_version"
 else
     conda_python_version=$(conda run -n $env_name python --version | awk '{print $2}')
     echo "The Python version in $env_name is $conda_python_version".
@@ -91,7 +91,7 @@ fi
 
 # Install requirements
 echo "Installing some requirements into $env_name environment..."
-conda install -n "$env_name" -y numpy scipy pandas pytables pyaml
+mamba install -n "$env_name" -y numpy scipy pandas pytables pyaml
 
 ## Add activate and deactivate scripts to load icetray env
 # Start by grabbing the environment path
